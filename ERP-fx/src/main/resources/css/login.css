@@ -12,12 +12,13 @@
 
 .title{
     -fx-font-size: 40px;
-    -fx-text-fill: -fx-primary-blue;
+    -fx-text-fill: -fx-primary-red;
+
 }
 
 .background{
-    -fx-background-color: -fx-primary-background;
-    /*-fx-border-color: -fx-primary-blue;*/
+    -fx-background-color: ghostwhite;
+    /*-fx-border-color: -fx-primary-blue;  -fx-background-color: -fx-primary-background;   */
 }
 
 .text{
@@ -25,13 +26,15 @@
 }
 
 .login-button{
-    -fx-text-fill: whitesmoke;
-    -fx-background-color: -fx-primary-red;
+    -fx-background-color: ghostwhite;
+    -fx-text-fill: -fx-primary-blue;
     -fx-background-radius: 0;
+    -fx-border-color: -fx-primary-blue;
 }
 
 .login-button:hover{
     -fx-text-fill: whitesmoke;
-    -fx-background-color: -fx-secondary-red;
+    -fx-background-color: -fx-secondary-blue;
+    -fx-text-fill: ghostwhite;
     -fx-background-radius: 0;
 }

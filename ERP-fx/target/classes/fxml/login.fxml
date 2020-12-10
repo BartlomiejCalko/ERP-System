@@ -10,33 +10,46 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.LoginController">
+<AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.LoginController">
    <children>
       <Button fx:id="exitButton" layoutX="521.0" layoutY="14.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="exit-button" text="X" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
          <children>
-            <Label styleClass="title" text="ERP System" />
-            <Label alignment="CENTER" styleClass="text" text="Sign in to ERP" />
-            <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" prefWidth="200.0" spacing="2.0">
                <children>
-                  <Label styleClass="text" text="Login">
+                  <Label styleClass="title" text="ERP" />
+                  <Label styleClass="text" text="Management System">
                      <HBox.margin>
-                        <Insets left="20.0" right="5.0" />
+                        <Insets top="16.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField />
+               </children>
+            </HBox>
+            <Label alignment="CENTER" styleClass="text" text="Login to ERP" />
+            <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefWidth="61.0" styleClass="text" text="Login">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="loginTextField" />
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label styleClass="text" text="Password" />
-                  <TextField />
+                  <TextField fx:id="passwordTextField" />
                </children>
             </HBox>
-            <Button fx:id="loginButton" mnemonicParsing="false" styleClass="login-button" text="Confirm" />
+            <Button fx:id="loginButton" mnemonicParsing="false" styleClass="login-button" text="Sign in" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="190.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>
