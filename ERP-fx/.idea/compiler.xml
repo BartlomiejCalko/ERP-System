@@ -19,8 +19,11 @@
         <module name="ERP-fx" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ERP-fx" target="1.5" />
+    <bytecodeTargetLevel target="8">
+      <module name="ERP-fx" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
   </component>
 </project>
