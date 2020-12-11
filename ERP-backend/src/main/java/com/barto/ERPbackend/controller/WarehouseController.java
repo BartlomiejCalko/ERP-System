@@ -1,9 +1,6 @@
 package com.barto.ERPbackend.controller;
 
-
-import com.barto.ERPbackend.entity.QuantityType;
 import com.barto.ERPbackend.entity.Warehouse;
-import com.barto.ERPbackend.repository.QuantityTypeRepository;
 import com.barto.ERPbackend.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,6 @@
 package com.barto.ERPbackend.controller;
 
-import com.barto.ERPbackend.entity.Item;
 import com.barto.ERPbackend.entity.Operator;
-import com.barto.ERPbackend.repository.ItemRepository;
 import com.barto.ERPbackend.repository.OperatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
