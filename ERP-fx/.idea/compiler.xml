@@ -20,10 +20,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="ERP-fx" target="8" />
+      <module name="ERP-fx" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ERP-fx" options="-parameters" />
+    </option>
   </component>
 </project>

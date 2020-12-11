@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.dto.UserCredentialsDTO;
+import sample.dto.OperatorCredentialsDTO;
 import sample.factory.PopupFactory;
 import sample.rest.Authenticator;
 import sample.rest.AuthenticatorImpl;
@@ -52,13 +52,13 @@ public class LoginController implements Initializable {
         waitingPopup.show();
         String login = loginTextField.getText();
         String password = passwordTextField.getText();
-        UserCredentialsDTO dto = new UserCredentialsDTO();
+        OperatorCredentialsDTO dto = new OperatorCredentialsDTO();
         dto.setLogin(login);
         dto.setPassword(password);
         authenticator.authenticate(dto, (authenticationResult) -> {
             Platform.runLater(() -> {
                 waitingPopup.close();
-                System.out.println("authenticationResult: " + authenticationResult);
+                System.out.println("authenticationResult: " + authenticationResult.isAuthenticated() + ", authenticationResult: " + authenticationResult.toString());
             });
         });
     }
