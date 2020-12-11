@@ -10,10 +10,13 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idEmployee;
     @Column
     private String firstName;
     @Column
     private String lastName;
+
+    @OneToOne(mappedBy = "employee")
+    private Operator operator;
 
 }
