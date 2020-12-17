@@ -1,10 +1,10 @@
 package sample.rest;
 
-import sample.dto.OperatorAuthenticationResultDTO;
+import sample.dto.OperatorAuthenticationResultDto;
 
 @FunctionalInterface
 public interface AuthenticationResultHandler {
 
-    void handle(OperatorAuthenticationResultDTO operatorAuthenticationResultDTO);
+    void handle(OperatorAuthenticationResultDto operatorAuthenticationResultDTO);
 
 }

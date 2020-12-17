@@ -1,9 +1,8 @@
 package sample.rest;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import sample.dto.OperatorAuthenticationResultDTO;
-import sample.dto.OperatorCredentialsDTO;
+import sample.dto.OperatorAuthenticationResultDto;
+import sample.dto.OperatorCredentialsDto;
 
 public class AuthenticatorImpl implements Authenticator{
 
@@ -15,17 +14,17 @@ public class AuthenticatorImpl implements Authenticator{
     }
 
     @Override
-    public void authenticate(OperatorCredentialsDTO operatorCredentialsDTO, AuthenticationResultHandler authenticationResultHandler) {
+    public void authenticate(OperatorCredentialsDto operatorCredentialsDTO, AuthenticationResultHandler authenticationResultHandler) {
         Runnable authenticationTask = () -> processAuthentication(operatorCredentialsDTO, authenticationResultHandler);
         Thread authenticationThread = new Thread(authenticationTask);
         authenticationThread.setDaemon(true);
         authenticationThread.start();
     }
 
-    private void processAuthentication(OperatorCredentialsDTO operatorCredentialsDTO, AuthenticationResultHandler authenticationResultHandler) {
+    private void processAuthentication(OperatorCredentialsDto operatorCredentialsDTO, AuthenticationResultHandler authenticationResultHandler) {
 //        ResponseEntity<OperatorAuthenticationResultDTO> responseEntity = restTemplate.postForEntity(AUTHENTICATION_URL, operatorCredentialsDTO, OperatorAuthenticationResultDTO.class);
 
-        OperatorAuthenticationResultDTO dto = new OperatorAuthenticationResultDTO();
+        OperatorAuthenticationResultDto dto = new OperatorAuthenticationResultDto();
         dto.setAuthenticated(true);
         dto.setFirstName("bart");
         dto.setLastName("cal");

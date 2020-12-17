@@ -3,7 +3,7 @@ package sample.dto;
 import lombok.Data;
 
 @Data
-public class OperatorAuthenticationResultDTO {
+public class OperatorAuthenticationResultDto {
 
     private Long idOperator;
     private String firstName;

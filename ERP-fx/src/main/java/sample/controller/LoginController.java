@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.dto.OperatorCredentialsDTO;
+import sample.dto.OperatorCredentialsDto;
 import sample.factory.PopupFactory;
 import sample.rest.Authenticator;
 import sample.rest.AuthenticatorImpl;
@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
         waitingPopup.show();
         String login = loginTextField.getText();
         String password = passwordTextField.getText();
-        OperatorCredentialsDTO dto = new OperatorCredentialsDTO();
+        OperatorCredentialsDto dto = new OperatorCredentialsDto();
         dto.setLogin(login);
         dto.setPassword(password);
         authenticator.authenticate(dto, (authenticationResult) -> {

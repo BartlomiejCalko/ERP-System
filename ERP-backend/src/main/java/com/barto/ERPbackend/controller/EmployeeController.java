@@ -1,5 +1,6 @@
 package com.barto.ERPbackend.controller;
 
+import com.barto.ERPbackend.dto.EmployeeDto;
 import com.barto.ERPbackend.entity.Employee;
 import com.barto.ERPbackend.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +22,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    List<Employee> listEmployees() {
-        return employeeRepository.findAll();
+    List<EmployeeDto> listEmployees() {
+        return employeeRepository.findAll()
+                .stream()
+                .map(EmployeeDto::of)
+                .collect(Collectors.toList());
     }
 
     @DeleteMapping("/employees")
