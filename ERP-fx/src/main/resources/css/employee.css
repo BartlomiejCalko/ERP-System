@@ -1,0 +1,13 @@
+.employee-button{
+    -fx-background-color: ghostwhite;
+    -fx-text-fill: -fx-primary-blue;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-primary-blue;
+}
+
+.employee-button:hover{
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: -fx-secondary-blue;
+    -fx-text-fill: ghostwhite;
+    -fx-background-radius: 0;
+}
