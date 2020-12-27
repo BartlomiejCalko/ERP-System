@@ -11,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.dto.EmployeeDto;
+import sample.factory.PopupFactory;
 import sample.rest.EmployeeRestClient;
 import sample.table.EmployeeTableModel;
 
@@ -27,7 +29,9 @@ import java.util.stream.Collectors;
 public class EmployeeController implements Initializable {
 
     private static final String ADD_EMPLOYEE_FXML = "/fxml/addEmployee.fxml";
+    private static final String VIEW_EMPLOYEE_FXML = "/fxml/viewEmployee.fxml";
     private final EmployeeRestClient employeeRestClient;
+    private final PopupFactory popupFactory;
     private ObservableList<EmployeeTableModel> data;
 
     @FXML
@@ -46,13 +50,42 @@ public class EmployeeController implements Initializable {
     public EmployeeController() {
         data = FXCollections.observableArrayList();
         employeeRestClient = new EmployeeRestClient();
+        popupFactory = new PopupFactory();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeAddEmployeeButton();
+        initializeViewEmployeeButton();
         initializeTableView();
         initializeRefreshButton();
+    }
+
+    private void initializeViewEmployeeButton() {
+        viewButton.setOnAction(x -> {
+            EmployeeTableModel employee = employeeTableView.getSelectionModel().getSelectedItem();
+            if (employee == null) {
+                return;
+            } else {
+                try {
+                    Stage waitingPopup = popupFactory.createWaitingPopup("Loading employee data...");
+                    waitingPopup.show();
+                    Stage viewEmployeeStage = new Stage();
+                    viewEmployeeStage.initStyle(StageStyle.UNDECORATED);
+                    viewEmployeeStage.initModality(Modality.APPLICATION_MODAL);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_EMPLOYEE_FXML));
+                    Scene scene = new Scene((BorderPane)loader.load(), 500, 400);
+                    viewEmployeeStage.setScene(scene);
+                    ViewEmplyeeController controller = loader.<ViewEmplyeeController>getController();
+                    controller.loadEmployeeData(employee.getIdEmployee(), () -> {
+                        waitingPopup.close();
+                        viewEmployeeStage.show();
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initializeRefreshButton() {
@@ -102,6 +135,4 @@ public class EmployeeController implements Initializable {
         });
         thread.start();
     }
-
-
 }

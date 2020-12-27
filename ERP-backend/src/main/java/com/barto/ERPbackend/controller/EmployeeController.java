@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +28,13 @@ public class EmployeeController {
                 .stream()
                 .map(EmployeeDto::of)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/employees/{idEmployee}")
+    public EmployeeDto getEmployee(@PathVariable Long idEmployee) throws InterruptedException {
+        Thread.sleep(500);
+        Optional<Employee> optionalEmployee = employeeRepository.findById(idEmployee);
+        return EmployeeDto.of(optionalEmployee.get());
     }
 
     @DeleteMapping("/employees")
