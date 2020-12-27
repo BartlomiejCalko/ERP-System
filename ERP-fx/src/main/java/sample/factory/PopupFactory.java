@@ -2,11 +2,13 @@ package sample.factory;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.handler.InfoPopupOkHandler;
 
 
 public class PopupFactory {
@@ -19,6 +21,7 @@ public class PopupFactory {
         pane.setAlignment(Pos.CENTER);
         pane.setSpacing(10);
         Label label = new Label(text);
+        label.setStyle(waitingLabelStyle());
         ProgressBar progressBar = new ProgressBar();
         pane.getChildren().addAll(label, progressBar);
         stage.setScene(new Scene(pane, 200, 100));
@@ -27,10 +30,53 @@ public class PopupFactory {
         return stage;
     }
 
-    private String waitingPopupPaneStyle() {
+    private String waitingLabelStyle() {
+        return "-fx-text-fill: #003366;";
+    }
 
+    private String waitingPopupPaneStyle() {
         return "-fx-primary-background: #c7c7c7; ";
     }
 
+    private String okButtonStyle() {
+        return "-fx-background-color: #F8F8FF;\n" +
+                "        -fx-text-fill: #003366;\n" +
+                "        -fx-background-radius: 0;\n" +
+                "        -fx-border-color: #003366;";
+    }
 
+    private String okButtonHoverStyle() {
+        return "-fx-background-color: #FF4A3C;\n" +
+                "        -fx-text-fill: #F5F5F5;\n" +
+                "        -fx-background-radius: 0;\n" +
+                "        -fx-border-color: #003366;";
+    }
+
+
+    public Stage createInfoPopup(String text, InfoPopupOkHandler handler) {
+        Stage stage = new Stage();
+        //stage.initStyle(StageStyle.UNDECORATED);
+        VBox pane = new VBox();
+        pane.setStyle(waitingPopupPaneStyle());
+        pane.setAlignment(Pos.CENTER);
+        pane.setSpacing(10);
+        Label label = new Label(text);
+        Button okButton = new Button("OK");
+        okButton.setStyle(okButtonStyle());
+        okButton.setOnMouseEntered(x -> {
+            okButton.setStyle(okButtonHoverStyle());
+        });
+        okButton.setOnMouseExited(x -> {
+            okButton.setStyle(okButtonStyle());
+        });
+        okButton.setOnAction(x -> {
+            stage.close();
+            handler.handle();
+        });
+        pane.getChildren().addAll(label, okButton);
+        stage.setScene(new Scene(pane, 200, 100));
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        return stage;
+    }
 }

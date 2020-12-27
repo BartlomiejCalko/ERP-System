@@ -28,23 +28,23 @@ public class EmployeeController implements Initializable {
 
     private static final String ADD_EMPLOYEE_FXML = "/fxml/addEmployee.fxml";
     private final EmployeeRestClient employeeRestClient;
+    private ObservableList<EmployeeTableModel> data;
 
     @FXML
     private TableView<EmployeeTableModel> employeeTableView;
-
     @FXML
     private Button addButton;
-
     @FXML
     private Button viewButton;
-
     @FXML
     private Button editButton;
-
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button refreshButton;
 
     public EmployeeController() {
+        data = FXCollections.observableArrayList();
         employeeRestClient = new EmployeeRestClient();
     }
 
@@ -52,6 +52,13 @@ public class EmployeeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initializeAddEmployeeButton();
         initializeTableView();
+        initializeRefreshButton();
+    }
+
+    private void initializeRefreshButton() {
+        refreshButton.setOnAction(x -> {
+            loadEmployeeData();
+        });
     }
 
     private void initializeAddEmployeeButton() {
@@ -76,25 +83,21 @@ public class EmployeeController implements Initializable {
         TableColumn firstNameColumn = new TableColumn("First Name");
         firstNameColumn.setMinWidth(100);
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<EmployeeTableModel, String>("firstName"));
-
         TableColumn lastNameColumn = new TableColumn("Last Name");
         lastNameColumn.setMinWidth(100);
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<EmployeeTableModel, String>("lastName"));
-
         TableColumn salary = new TableColumn("Salary");
         salary.setMinWidth(100);
         salary.setCellValueFactory(new PropertyValueFactory<EmployeeTableModel, String>("salary"));
-
         employeeTableView.getColumns().addAll(firstNameColumn, lastNameColumn, salary);
-
-        ObservableList<EmployeeTableModel> data = FXCollections.observableArrayList();
-        loadEmployeeData(data);
+        loadEmployeeData();
         employeeTableView.setItems(data);
     }
 
-    private void loadEmployeeData(ObservableList<EmployeeTableModel> data) {
+    private void loadEmployeeData() {
         Thread thread = new Thread(() -> {
             List<EmployeeDto> employees = employeeRestClient.getEmployees();
+            data.clear();
             data.addAll(employees.stream().map(EmployeeTableModel::of).collect(Collectors.toList()));
         });
         thread.start();
